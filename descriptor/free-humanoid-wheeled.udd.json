@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "name": "free_humanoid_wheeled",
+    "version": "0.0.1",
+    "units_length": "Metre",
+    "author": "Free Humanoid Wheeled Contributors",
+    "description": "Free Humanoid Wheeled — sibling morphology to the Free Humanoid Platform (humanoid_bipedal). Targeted at the shoal dock-B service mission (urban stormwater outfalls, harbor docks, industrial discharge points). Wheeled differential-drive base + tower stand + bipedal upper body inherited verbatim. ~70 kg total system, 2 kWh battery, 30 kg sustained payload at extended reach, 1.5 m/s peak speed, 600x800x350 mm base footprint, 15-inch pneumatic drive wheels. Drive actuator: QDD direct-drive into wheel hub (corpus: mit-cheetah-2 / mjbots-moteus). Upper body actuator distribution inherited from bipedal sibling (corpus: honda-e0 harmonic-drive at shoulder/elbow, shadow-dexterous-hand tendon at wrist/hand, pisa-iit-softhand at synergy hand, mini-cheetah QDD at neck/waist). Safety supervisor: MathGround-style Simplex (corpus: sherman-simplex-architecture, control-barrier-functions) plus wheeled-specific invariants (slope-tilt, edge-proximity, low-battery-on-shore-power). Mission integration with shoal dock-B (cartridge-swap, waste-hopper, biology-reservoir handshake, water-utility EAM). All masses and inertias are scaffold placeholders — iterate against physical CAD before any build.",
+    "generator": "free-humanoid-wheeled-scaffold",
+    "morphology_family": "humanoid_wheeled",
+    "corpus_anchors": [
+      "dlr-justin",
+      "pr2",
+      "willow-pr1",
+      "pepper-softbank",
+      "nao",
+      "toyota-hsr",
+      "reachy-2-pollen-2023",
+      "ascento",
+      "mit-cheetah-2",
+      "mjbots-moteus",
+      "sumitomo-cyclo",
+      "honda-e0",
+      "shadow-dexterous-hand",
+      "pisa-iit-softhand",
+      "mini-cheetah",
+      "sherman-simplex-architecture",
+      "control-barrier-functions",
+      "forbidden-planet-robby",
+      "magnus-robot-fighter",
+      "b-9-lost-in-space",
+      "silent-running-drones"
+    ],
+    "siblings": {
+      "bipedal_morphology": "../../free-humanoid-platform/descriptor/free-humanoid.udd.json",
+      "deployment_partner": "../../clean_fish/ARCHITECTURE.md"
+    }
+  },
+  "robot": {
+    "links": [
+      { "name": "chassis",          "mass_kg": 8.000, "inertia": [3.5e-1, 5.0e-1, 4.0e-1, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_wheeled_chassis_v0" }, "_metadata": { "comment": "Wheeled base chassis. 600x800x350 mm aluminum monocoque. Corpus citation: dlr-justin (2009), pr2 (2010)." } },
+      { "name": "L_drive_wheel",    "mass_kg": 3.500, "inertia": [3.0e-2, 5.0e-2, 3.0e-2, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_wheel_pneumatic_15in_v0" }, "_metadata": { "comment": "15 inch pneumatic drive wheel, left. Corpus citation: dlr-justin, pr2 outdoor variants." } },
+      { "name": "R_drive_wheel",    "mass_kg": 3.500, "inertia": [3.0e-2, 5.0e-2, 3.0e-2, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_wheel_pneumatic_15in_v0" }, "_metadata": { "comment": "15 inch pneumatic drive wheel, right." } },
+      { "name": "L_caster",         "mass_kg": 0.800, "inertia": [4.0e-3, 4.0e-3, 4.0e-3, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_caster_swivel_8in_v0" }, "_metadata": { "comment": "8 inch passive swivel caster, left front. Corpus citation: pr2, dlr-justin." } },
+      { "name": "R_caster",         "mass_kg": 0.800, "inertia": [4.0e-3, 4.0e-3, 4.0e-3, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_caster_swivel_8in_v0" }, "_metadata": { "comment": "8 inch passive swivel caster, right front." } },
+      { "name": "battery_module_a", "mass_kg": 9.000, "inertia": [4.0e-2, 4.0e-2, 2.0e-2, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_wheeled_battery_module_v0" }, "_metadata": { "comment": "1 kWh hot-swap module, left side, mounted between drive wheels for low COM. Corpus citation: hyundai-boston-dynamics-spot." } },
+      { "name": "battery_module_b", "mass_kg": 9.000, "inertia": [4.0e-2, 4.0e-2, 2.0e-2, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_wheeled_battery_module_v0" }, "_metadata": { "comment": "1 kWh hot-swap module, right side." } },
+      { "name": "tower_stand",      "mass_kg": 4.500, "inertia": [1.5e-1, 1.5e-1, 2.0e-2, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_wheeled_tower_stand_v0" }, "_metadata": { "comment": "Rigid aluminum tower stand. Mounts upper body pelvis at 0.55 m above ground. Includes prismatic torso lift +/-150 mm. Lidar mount at top (1.0 m). Corpus citation: toyota-hsr (telescoping torso)." } },
+
+      { "name": "pelvis", "mass_kg": 8.000, "inertia": [8.0e-2, 6.0e-2, 4.0e-2, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_pelvis_v0" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "torso", "mass_kg": 14.000, "inertia": [2.5e-1, 2.0e-1, 1.0e-1, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_torso_v0" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "head",  "mass_kg": 3.500, "inertia": [1.5e-2, 1.5e-2, 1.0e-2, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_head_v0" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "neck_yaw_link",   "mass_kg": 0.30, "inertia": [4.0e-4, 4.0e-4, 4.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_neck_yaw_v0" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+
+      { "name": "L_clavicle",  "mass_kg": 0.50, "inertia": [4.0e-4, 4.0e-4, 4.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_clavicle_v0" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "L_shoulder_pitch_housing", "mass_kg": 0.80, "inertia": [8.0e-4, 8.0e-4, 6.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_harmonic_drive__ratio-100__motor-bldc-100w" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "L_shoulder_roll_housing",  "mass_kg": 0.80, "inertia": [8.0e-4, 8.0e-4, 6.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_harmonic_drive__ratio-100__motor-bldc-100w" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "L_upper_arm",  "mass_kg": 1.50, "inertia": [3.0e-3, 3.0e-3, 1.0e-3, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_brackets_arm_segment__length-300" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "L_elbow_housing",   "mass_kg": 0.60, "inertia": [6.0e-4, 6.0e-4, 4.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_harmonic_drive__ratio-100__motor-bldc-100w" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "L_forearm",    "mass_kg": 1.20, "inertia": [2.5e-3, 2.5e-3, 8.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_brackets_arm_segment__length-260" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "L_wrist_pitch_link", "mass_kg": 0.20, "inertia": [1.5e-4, 1.5e-4, 1.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_tendon_block__channels-3" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "L_wrist_roll_link",  "mass_kg": 0.20, "inertia": [1.5e-4, 1.5e-4, 1.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_tendon_block__channels-3" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "L_hand", "mass_kg": 0.45, "inertia": [3.0e-4, 3.0e-4, 2.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_hand_underactuated_v0" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+
+      { "name": "R_clavicle",  "mass_kg": 0.50, "inertia": [4.0e-4, 4.0e-4, 4.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_clavicle_v0" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_shoulder_pitch_housing", "mass_kg": 0.80, "inertia": [8.0e-4, 8.0e-4, 6.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_harmonic_drive__ratio-100__motor-bldc-100w" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_shoulder_roll_housing",  "mass_kg": 0.80, "inertia": [8.0e-4, 8.0e-4, 6.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_harmonic_drive__ratio-100__motor-bldc-100w" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_upper_arm",  "mass_kg": 1.50, "inertia": [3.0e-3, 3.0e-3, 1.0e-3, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_brackets_arm_segment__length-300" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_elbow_housing",   "mass_kg": 0.60, "inertia": [6.0e-4, 6.0e-4, 4.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_harmonic_drive__ratio-100__motor-bldc-100w" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_forearm",    "mass_kg": 1.20, "inertia": [2.5e-3, 2.5e-3, 8.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_brackets_arm_segment__length-260" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_wrist_pitch_link", "mass_kg": 0.20, "inertia": [1.5e-4, 1.5e-4, 1.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_tendon_block__channels-3" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_wrist_roll_link",  "mass_kg": 0.20, "inertia": [1.5e-4, 1.5e-4, 1.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "catalog_joints_tendon_block__channels-3" }, "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_hand", "mass_kg": 0.45, "inertia": [3.0e-4, 3.0e-4, 2.0e-4, 0, 0, 0], "geometry_ref": { "type": "mesh_hash", "hash": "free_humanoid_hand_underactuated_v0" }, "_metadata": { "inherited_from": "free-humanoid-platform" } }
+    ],
+    "joints": [
+      { "name": "L_DRIVE_wheel",     "joint_type": "continuous", "parent_link": "chassis", "child_link": "L_drive_wheel", "axis": [0, 1, 0], "origin_xyz": [-0.10,  0.30, 0.190], "origin_rpy": [0, 0, 0], "limits": { "effort_max": 80.0, "velocity_max": 8.0 }, "_metadata": { "comment": "Differential-drive left wheel. 15 inch (~190 mm radius) pneumatic. Corpus citation: dlr-justin, pr2." } },
+      { "name": "R_DRIVE_wheel",     "joint_type": "continuous", "parent_link": "chassis", "child_link": "R_drive_wheel", "axis": [0, 1, 0], "origin_xyz": [-0.10, -0.30, 0.190], "origin_rpy": [0, 0, 0], "limits": { "effort_max": 80.0, "velocity_max": 8.0 }, "_metadata": { "comment": "Differential-drive right wheel." } },
+      { "name": "L_CASTER_swivel",   "joint_type": "continuous", "parent_link": "chassis", "child_link": "L_caster", "axis": [0, 0, 1], "origin_xyz": [ 0.30,  0.20, 0.100], "origin_rpy": [0, 0, 0], "limits": { "effort_max": 0.0, "velocity_max": 20.0 }, "_metadata": { "passive": true, "comment": "Passive swivel caster, left front. Corpus citation: pr2, dlr-justin." } },
+      { "name": "R_CASTER_swivel",   "joint_type": "continuous", "parent_link": "chassis", "child_link": "R_caster", "axis": [0, 0, 1], "origin_xyz": [ 0.30, -0.20, 0.100], "origin_rpy": [0, 0, 0], "limits": { "effort_max": 0.0, "velocity_max": 20.0 }, "_metadata": { "passive": true, "comment": "Passive swivel caster, right front." } },
+      { "name": "BATTERY_a_fixed",   "joint_type": "fixed",      "parent_link": "chassis", "child_link": "battery_module_a", "axis": [0, 0, 1], "origin_xyz": [-0.10,  0.13, 0.150], "origin_rpy": [0, 0, 0], "_metadata": { "comment": "Hot-swap mount, single-module-at-a-time. The mating geometry is the CC0 commons spec inherited from free-humanoid-platform commitment #6." } },
+      { "name": "BATTERY_b_fixed",   "joint_type": "fixed",      "parent_link": "chassis", "child_link": "battery_module_b", "axis": [0, 0, 1], "origin_xyz": [-0.10, -0.13, 0.150], "origin_rpy": [0, 0, 0], "_metadata": { "comment": "Hot-swap mount, second module." } },
+      { "name": "CHASSIS_to_tower",  "joint_type": "fixed",      "parent_link": "chassis", "child_link": "tower_stand", "axis": [0, 0, 1], "origin_xyz": [ 0.00, 0.00, 0.350], "origin_rpy": [0, 0, 0], "_metadata": { "comment": "Tower stand mounts to top of chassis." } },
+      { "name": "TOWER_lift",        "joint_type": "prismatic",  "parent_link": "tower_stand", "child_link": "pelvis", "axis": [0, 0, 1], "origin_xyz": [ 0.00, 0.00, 0.200], "origin_rpy": [0, 0, 0], "limits": { "lower": -0.150, "upper": 0.150, "effort_max": 1500.0, "velocity_max": 0.05 }, "_metadata": { "comment": "Torso lift, +/-150 mm. Corpus citation: toyota-hsr telescoping-torso." } },
+
+      { "name": "WAIST_yaw", "joint_type": "revolute", "parent_link": "pelvis", "child_link": "torso", "axis": [0, 0, 1], "origin_xyz": [0.0, 0.0, 0.18], "origin_rpy": [0, 0, 0], "limits": { "lower": -1.5, "upper": 1.5, "effort_max": 80.0, "velocity_max": 4.0 } },
+
+      { "name": "NECK_yaw",   "joint_type": "revolute", "parent_link": "torso", "child_link": "neck_yaw_link", "axis": [0, 0, 1], "origin_xyz": [0.0, 0.0, 0.42], "origin_rpy": [0, 0, 0], "limits": { "lower": -1.4, "upper": 1.4, "effort_max": 8.0, "velocity_max": 6.0 } },
+      { "name": "NECK_pitch", "joint_type": "revolute", "parent_link": "neck_yaw_link", "child_link": "head", "axis": [0, 1, 0], "origin_xyz": [0.0, 0.0, 0.06], "origin_rpy": [0, 0, 0], "limits": { "lower": -0.7, "upper": 0.7, "effort_max": 8.0, "velocity_max": 6.0 } },
+
+      { "name": "L_CLAVICLE_fixed", "joint_type": "fixed", "parent_link": "torso", "child_link": "L_clavicle", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.16, 0.36], "origin_rpy": [0, 0, 0] },
+      { "name": "L_SHOULDER_pitch", "joint_type": "revolute", "parent_link": "L_clavicle", "child_link": "L_shoulder_pitch_housing", "axis": [0, 1, 0], "origin_xyz": [0.00, 0.04, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -3.14, "upper": 3.14, "effort_max": 60.0, "velocity_max": 6.0 } },
+      { "name": "L_SHOULDER_roll",  "joint_type": "revolute", "parent_link": "L_shoulder_pitch_housing", "child_link": "L_shoulder_roll_housing", "axis": [1, 0, 0], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -0.4, "upper": 3.0, "effort_max": 60.0, "velocity_max": 6.0 } },
+      { "name": "L_SHOULDER_yaw",   "joint_type": "revolute", "parent_link": "L_shoulder_roll_housing", "child_link": "L_upper_arm", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -2.5, "upper": 2.5, "effort_max": 40.0, "velocity_max": 8.0 } },
+      { "name": "L_ELBOW_pitch",    "joint_type": "revolute", "parent_link": "L_upper_arm", "child_link": "L_elbow_housing", "axis": [0, 1, 0], "origin_xyz": [0.00, 0.00, -0.30], "origin_rpy": [0, 0, 0], "limits": { "lower": -2.5, "upper": 0.0, "effort_max": 40.0, "velocity_max": 8.0 } },
+      { "name": "L_ELBOW_to_forearm", "joint_type": "fixed", "parent_link": "L_elbow_housing", "child_link": "L_forearm", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0] },
+      { "name": "L_WRIST_yaw",   "joint_type": "revolute", "parent_link": "L_forearm", "child_link": "L_wrist_pitch_link", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.00, -0.26], "origin_rpy": [0, 0, 0], "limits": { "lower": -2.5, "upper": 2.5, "effort_max": 8.0, "velocity_max": 8.0 } },
+      { "name": "L_WRIST_pitch", "joint_type": "revolute", "parent_link": "L_wrist_pitch_link", "child_link": "L_wrist_roll_link", "axis": [0, 1, 0], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -1.0, "upper": 1.0, "effort_max": 8.0, "velocity_max": 8.0 } },
+      { "name": "L_WRIST_roll",  "joint_type": "revolute", "parent_link": "L_wrist_roll_link", "child_link": "L_hand", "axis": [1, 0, 0], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -1.6, "upper": 1.6, "effort_max": 6.0, "velocity_max": 8.0 } },
+
+      { "name": "R_CLAVICLE_fixed", "joint_type": "fixed", "parent_link": "torso", "child_link": "R_clavicle", "axis": [0, 0, 1], "origin_xyz": [0.00, -0.16, 0.36], "origin_rpy": [0, 0, 0] },
+      { "name": "R_SHOULDER_pitch", "joint_type": "revolute", "parent_link": "R_clavicle", "child_link": "R_shoulder_pitch_housing", "axis": [0, 1, 0], "origin_xyz": [0.00, -0.04, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -3.14, "upper": 3.14, "effort_max": 60.0, "velocity_max": 6.0 } },
+      { "name": "R_SHOULDER_roll",  "joint_type": "revolute", "parent_link": "R_shoulder_pitch_housing", "child_link": "R_shoulder_roll_housing", "axis": [1, 0, 0], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -3.0, "upper": 0.4, "effort_max": 60.0, "velocity_max": 6.0 } },
+      { "name": "R_SHOULDER_yaw",   "joint_type": "revolute", "parent_link": "R_shoulder_roll_housing", "child_link": "R_upper_arm", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -2.5, "upper": 2.5, "effort_max": 40.0, "velocity_max": 8.0 } },
+      { "name": "R_ELBOW_pitch",    "joint_type": "revolute", "parent_link": "R_upper_arm", "child_link": "R_elbow_housing", "axis": [0, 1, 0], "origin_xyz": [0.00, 0.00, -0.30], "origin_rpy": [0, 0, 0], "limits": { "lower": -2.5, "upper": 0.0, "effort_max": 40.0, "velocity_max": 8.0 } },
+      { "name": "R_ELBOW_to_forearm", "joint_type": "fixed", "parent_link": "R_elbow_housing", "child_link": "R_forearm", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0] },
+      { "name": "R_WRIST_yaw",   "joint_type": "revolute", "parent_link": "R_forearm", "child_link": "R_wrist_pitch_link", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.00, -0.26], "origin_rpy": [0, 0, 0], "limits": { "lower": -2.5, "upper": 2.5, "effort_max": 8.0, "velocity_max": 8.0 } },
+      { "name": "R_WRIST_pitch", "joint_type": "revolute", "parent_link": "R_wrist_pitch_link", "child_link": "R_wrist_roll_link", "axis": [0, 1, 0], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -1.0, "upper": 1.0, "effort_max": 8.0, "velocity_max": 8.0 } },
+      { "name": "R_WRIST_roll",  "joint_type": "revolute", "parent_link": "R_wrist_roll_link", "child_link": "R_hand", "axis": [1, 0, 0], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": -1.6, "upper": 1.6, "effort_max": 6.0, "velocity_max": 8.0 } },
+
+      { "name": "L_HAND_synergy", "joint_type": "revolute", "parent_link": "L_hand", "child_link": "L_hand", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": 0.0, "upper": 1.0, "effort_max": 6.0, "velocity_max": 52.0 }, "_metadata": { "synergy_dof": true, "spool_radius_m": 0.008, "inherited_from": "free-humanoid-platform", "comment": "Synergy progress DoF [0,1]. Single motor + 14:1 reducer drives all 5 fingers via fixed-ratio mechanical synergy (corpus: pisa-iit-softhand)." } },
+      { "name": "R_HAND_synergy", "joint_type": "revolute", "parent_link": "R_hand", "child_link": "R_hand", "axis": [0, 0, 1], "origin_xyz": [0.00, 0.00, 0.00], "origin_rpy": [0, 0, 0], "limits": { "lower": 0.0, "upper": 1.0, "effort_max": 6.0, "velocity_max": 52.0 }, "_metadata": { "synergy_dof": true, "spool_radius_m": 0.008, "inherited_from": "free-humanoid-platform" } }
+    ],
+    "actuator_slots": [
+      { "name": "L_DRIVE_wheel",    "joint": "L_DRIVE_wheel",    "tier": 2, "type": "qdd",            "reducer_ratio": 10.0, "peak_torque_nm": 250.0, "continuous_torque_nm": 80.0, "max_velocity_rad_s": 8.0,  "corpus_citation": "mit-cheetah-2", "_metadata": { "controller_part_number": "mjbots Moteus n1", "controller_corpus_citation": "mjbots-moteus", "comment": "QDD direct-drive into 15 inch wheel hub via ~10:1 planetary reduction. Target 80 Nm continuous / 250 Nm peak at the wheel — sufficient to climb a 10 deg ramp at 1 m/s with full payload. Architecture corpus: mit-cheetah-2 (2014); controller corpus: mjbots-moteus (2019)." } },
+      { "name": "R_DRIVE_wheel",    "joint": "R_DRIVE_wheel",    "tier": 2, "type": "qdd",            "reducer_ratio": 10.0, "peak_torque_nm": 250.0, "continuous_torque_nm": 80.0, "max_velocity_rad_s": 8.0,  "corpus_citation": "mit-cheetah-2", "_metadata": { "controller_part_number": "mjbots Moteus n1", "controller_corpus_citation": "mjbots-moteus" } },
+      { "name": "TOWER_lift",       "joint": "TOWER_lift",       "tier": 2, "type": "linear",                                                                                                                "corpus_citation": "toyota-hsr", "_metadata": { "comment": "Linear actuator for prismatic torso lift, +/-150 mm. Corpus citation: toyota-hsr telescoping-torso disclosure." } },
+
+      { "name": "WAIST_yaw",        "joint": "WAIST_yaw",        "tier": 2, "type": "qdd",            "corpus_citation": "mini-cheetah" },
+
+      { "name": "NECK_yaw",         "joint": "NECK_yaw",         "tier": 1, "type": "qdd",            "corpus_citation": "mini-cheetah" },
+      { "name": "NECK_pitch",       "joint": "NECK_pitch",       "tier": 1, "type": "qdd",            "corpus_citation": "mini-cheetah" },
+
+      { "name": "L_SHOULDER_pitch", "joint": "L_SHOULDER_pitch", "tier": 2, "type": "harmonic_drive", "corpus_citation": "honda-e0" },
+      { "name": "L_SHOULDER_roll",  "joint": "L_SHOULDER_roll",  "tier": 2, "type": "harmonic_drive", "corpus_citation": "honda-e0" },
+      { "name": "L_SHOULDER_yaw",   "joint": "L_SHOULDER_yaw",   "tier": 2, "type": "harmonic_drive", "corpus_citation": "honda-e0" },
+      { "name": "L_ELBOW_pitch",    "joint": "L_ELBOW_pitch",    "tier": 2, "type": "harmonic_drive", "corpus_citation": "honda-e0" },
+      { "name": "L_WRIST_yaw",      "joint": "L_WRIST_yaw",      "tier": 1, "type": "tendon",         "corpus_citation": "shadow-dexterous-hand" },
+      { "name": "L_WRIST_pitch",    "joint": "L_WRIST_pitch",    "tier": 1, "type": "tendon",         "corpus_citation": "shadow-dexterous-hand" },
+      { "name": "L_WRIST_roll",     "joint": "L_WRIST_roll",     "tier": 1, "type": "tendon",         "corpus_citation": "shadow-dexterous-hand" },
+
+      { "name": "R_SHOULDER_pitch", "joint": "R_SHOULDER_pitch", "tier": 2, "type": "harmonic_drive", "corpus_citation": "honda-e0" },
+      { "name": "R_SHOULDER_roll",  "joint": "R_SHOULDER_roll",  "tier": 2, "type": "harmonic_drive", "corpus_citation": "honda-e0" },
+      { "name": "R_SHOULDER_yaw",   "joint": "R_SHOULDER_yaw",   "tier": 2, "type": "harmonic_drive", "corpus_citation": "honda-e0" },
+      { "name": "R_ELBOW_pitch",    "joint": "R_ELBOW_pitch",    "tier": 2, "type": "harmonic_drive", "corpus_citation": "honda-e0" },
+      { "name": "R_WRIST_yaw",      "joint": "R_WRIST_yaw",      "tier": 1, "type": "tendon",         "corpus_citation": "shadow-dexterous-hand" },
+      { "name": "R_WRIST_pitch",    "joint": "R_WRIST_pitch",    "tier": 1, "type": "tendon",         "corpus_citation": "shadow-dexterous-hand" },
+      { "name": "R_WRIST_roll",     "joint": "R_WRIST_roll",     "tier": 1, "type": "tendon",         "corpus_citation": "shadow-dexterous-hand" },
+
+      { "name": "L_HAND_synergy",   "joint": "L_HAND_synergy",   "tier": 2, "type": "tendon",         "reducer_ratio": 14.0, "peak_torque_nm": 6.25, "continuous_torque_nm": 0.82, "max_velocity_rad_s": 52.4, "corpus_citation": "pisa-iit-softhand", "_metadata": { "inherited_from": "free-humanoid-platform" } },
+      { "name": "R_HAND_synergy",   "joint": "R_HAND_synergy",   "tier": 2, "type": "tendon",         "reducer_ratio": 14.0, "peak_torque_nm": 6.25, "continuous_torque_nm": 0.82, "max_velocity_rad_s": 52.4, "corpus_citation": "pisa-iit-softhand", "_metadata": { "inherited_from": "free-humanoid-platform" } }
+    ],
+    "modes": [
+      {
+        "name": "safe_pose",
+        "_metadata": { "comment": "Wheel-locked, brakes latched, upper body in tucked posture. Default fail-safe state. Corpus citation: sherman-simplex-architecture, control-barrier-functions." },
+        "hold_positions": {
+          "L_DRIVE_wheel": 0.0, "R_DRIVE_wheel": 0.0,
+          "TOWER_lift": -0.150,
+          "WAIST_yaw": 0.0,
+          "NECK_yaw": 0.0, "NECK_pitch": 0.0,
+          "L_SHOULDER_pitch": 0.0, "L_SHOULDER_roll": 0.0, "L_SHOULDER_yaw": 0.0, "L_ELBOW_pitch": -1.4,
+          "L_WRIST_yaw": 0.0, "L_WRIST_pitch": 0.0, "L_WRIST_roll": 0.0,
+          "R_SHOULDER_pitch": 0.0, "R_SHOULDER_roll": 0.0, "R_SHOULDER_yaw": 0.0, "R_ELBOW_pitch": -1.4,
+          "R_WRIST_yaw": 0.0, "R_WRIST_pitch": 0.0, "R_WRIST_roll": 0.0
+        },
+        "actuator_roles": {
+          "L_DRIVE_wheel": "brake", "R_DRIVE_wheel": "brake",
+          "TOWER_lift": "hold",
+          "WAIST_yaw": "hold",
+          "NECK_yaw": "hold", "NECK_pitch": "hold",
+          "L_SHOULDER_pitch": "hold", "L_SHOULDER_roll": "hold", "L_SHOULDER_yaw": "hold", "L_ELBOW_pitch": "hold",
+          "L_WRIST_yaw": "hold", "L_WRIST_pitch": "hold", "L_WRIST_roll": "hold",
+          "R_SHOULDER_pitch": "hold", "R_SHOULDER_roll": "hold", "R_SHOULDER_yaw": "hold", "R_ELBOW_pitch": "hold",
+          "R_WRIST_yaw": "hold", "R_WRIST_pitch": "hold", "R_WRIST_roll": "hold"
+        }
+      },
+      {
+        "name": "dock_approach",
+        "_metadata": { "comment": "Low-velocity differential-drive toward dock fiducial. Linear vel <= 0.5 m/s, angular vel <= 0.5 rad/s. Curbedge invariant active. Corpus citation: dlr-justin, pr2." },
+        "hold_positions": {},
+        "actuator_roles": {
+          "L_DRIVE_wheel": "velocity", "R_DRIVE_wheel": "velocity",
+          "TOWER_lift": "hold",
+          "WAIST_yaw": "impedance",
+          "NECK_yaw": "impedance", "NECK_pitch": "impedance",
+          "L_SHOULDER_pitch": "impedance", "L_SHOULDER_roll": "impedance", "L_SHOULDER_yaw": "impedance", "L_ELBOW_pitch": "impedance",
+          "L_WRIST_yaw": "hold", "L_WRIST_pitch": "hold", "L_WRIST_roll": "hold",
+          "R_SHOULDER_pitch": "impedance", "R_SHOULDER_roll": "impedance", "R_SHOULDER_yaw": "impedance", "R_ELBOW_pitch": "impedance",
+          "R_WRIST_yaw": "hold", "R_WRIST_pitch": "hold", "R_WRIST_roll": "hold"
+        }
+      },
+      {
+        "name": "cartridge_swap",
+        "_metadata": { "comment": "Wheels locked, brakes latched, upper body in manipulation. Targets shoal cartridge port. Corpus citation: dlr-justin (mobile manipulation), shadow-dexterous-hand. shoal integration: clean_fish ARCHITECTURE 2.2." },
+        "hold_positions": { "L_DRIVE_wheel": 0.0, "R_DRIVE_wheel": 0.0 },
+        "actuator_roles": {
+          "L_DRIVE_wheel": "brake", "R_DRIVE_wheel": "brake",
+          "TOWER_lift": "impedance",
+          "WAIST_yaw": "impedance",
+          "NECK_yaw": "impedance", "NECK_pitch": "impedance",
+          "L_SHOULDER_pitch": "impedance", "L_SHOULDER_roll": "impedance", "L_SHOULDER_yaw": "impedance", "L_ELBOW_pitch": "impedance",
+          "L_WRIST_yaw": "impedance", "L_WRIST_pitch": "impedance", "L_WRIST_roll": "impedance",
+          "R_SHOULDER_pitch": "impedance", "R_SHOULDER_roll": "impedance", "R_SHOULDER_yaw": "impedance", "R_ELBOW_pitch": "impedance",
+          "R_WRIST_yaw": "impedance", "R_WRIST_pitch": "impedance", "R_WRIST_roll": "impedance"
+        }
+      },
+      {
+        "name": "waste_retrieval",
+        "_metadata": { "comment": "Wheels locked. Hopper retrieval from dock. Bilateral grasp likely. Corpus citation: dlr-justin (dual-arm mobile manipulation). shoal integration: clean_fish ARCHITECTURE 3." },
+        "hold_positions": { "L_DRIVE_wheel": 0.0, "R_DRIVE_wheel": 0.0 },
+        "actuator_roles": {
+          "L_DRIVE_wheel": "brake", "R_DRIVE_wheel": "brake",
+          "TOWER_lift": "impedance",
+          "WAIST_yaw": "impedance",
+          "NECK_yaw": "impedance", "NECK_pitch": "impedance",
+          "L_SHOULDER_pitch": "impedance", "L_SHOULDER_roll": "impedance", "L_SHOULDER_yaw": "impedance", "L_ELBOW_pitch": "impedance",
+          "L_WRIST_yaw": "impedance", "L_WRIST_pitch": "impedance", "L_WRIST_roll": "impedance",
+          "R_SHOULDER_pitch": "impedance", "R_SHOULDER_roll": "impedance", "R_SHOULDER_yaw": "impedance", "R_ELBOW_pitch": "impedance",
+          "R_WRIST_yaw": "impedance", "R_WRIST_pitch": "impedance", "R_WRIST_roll": "impedance"
+        }
+      },
+      {
+        "name": "fleet_coordination",
+        "_metadata": { "comment": "Idle posture; JANUS acoustic receiver active; comms (WiFi 6, 5G) open; safety supervisor live. Used while listening for fish that are still in-water near the dock. Corpus citation: dlr-justin (mobile coordination hub). shoal integration: clean_fish ARCHITECTURE 4." },
+        "hold_positions": { "L_DRIVE_wheel": 0.0, "R_DRIVE_wheel": 0.0 },
+        "actuator_roles": {
+          "L_DRIVE_wheel": "brake", "R_DRIVE_wheel": "brake",
+          "TOWER_lift": "hold",
+          "WAIST_yaw": "hold",
+          "NECK_yaw": "impedance", "NECK_pitch": "impedance",
+          "L_SHOULDER_pitch": "hold", "L_SHOULDER_roll": "hold", "L_SHOULDER_yaw": "hold", "L_ELBOW_pitch": "hold",
+          "L_WRIST_yaw": "hold", "L_WRIST_pitch": "hold", "L_WRIST_roll": "hold",
+          "R_SHOULDER_pitch": "hold", "R_SHOULDER_roll": "hold", "R_SHOULDER_yaw": "hold", "R_ELBOW_pitch": "hold",
+          "R_WRIST_yaw": "hold", "R_WRIST_pitch": "hold", "R_WRIST_roll": "hold"
+        }
+      },
+      {
+        "name": "idle",
+        "_metadata": { "comment": "Low-power state. Drive rails de-energized, brakes engaged. Compute and safety supervisor remain live on UPS. Used between work orders." },
+        "hold_positions": { "L_DRIVE_wheel": 0.0, "R_DRIVE_wheel": 0.0, "TOWER_lift": -0.150 },
+        "actuator_roles": {
+          "L_DRIVE_wheel": "brake", "R_DRIVE_wheel": "brake",
+          "TOWER_lift": "hold",
+          "WAIST_yaw": "hold",
+          "NECK_yaw": "hold", "NECK_pitch": "hold",
+          "L_SHOULDER_pitch": "hold", "L_SHOULDER_roll": "hold", "L_SHOULDER_yaw": "hold", "L_ELBOW_pitch": "hold",
+          "L_WRIST_yaw": "hold", "L_WRIST_pitch": "hold", "L_WRIST_roll": "hold",
+          "R_SHOULDER_pitch": "hold", "R_SHOULDER_roll": "hold", "R_SHOULDER_yaw": "hold", "R_ELBOW_pitch": "hold",
+          "R_WRIST_yaw": "hold", "R_WRIST_pitch": "hold", "R_WRIST_roll": "hold"
+        }
+      }
+    ]
+  }
+}

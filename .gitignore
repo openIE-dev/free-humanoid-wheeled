@@ -1,0 +1,10 @@
+# Internal/dev workspace
+notes-claude/
+
+# OS
+.DS_Store
+*.swp
+
+# Python
+__pycache__/
+*.pyc
