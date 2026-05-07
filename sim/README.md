@@ -5,6 +5,7 @@ MuJoCo, Gazebo, and Drake simulation model pointers for Free Humanoid Wheeled.
 This directory will hold:
 
 - **MuJoCo / MJX model.** Compiled from [descriptor/free-humanoid-wheeled.udd.json](../descriptor/free-humanoid-wheeled.udd.json) by the OpenLoco compiler. The reference simulation environment for differential-drive MPC and dock-approach controller development.
+- **[Genesis](https://github.com/Genesis-Embodied-AI/Genesis) model.** Secondary GPU-parallelized simulator; the open-source unified-multi-physics engine (rigid + soft + MPM + FEM + fluid) released December 2024 by a CMU/Stanford/MIT/Tsinghua/Peking/ETH/UMD academic collaboration. Apache-2.0. 43M FPS rigid-body simulation on a single RTX 4090; differentiable simulation for gradient-based policy optimization. URDF/MJCF interoperable, so the same descriptor compiles in without modification. Use for sim-to-real-at-scale RL training of dock-approach and curb-edge controllers. Corpus citation: [`genesis-embodied-ai-simulator`](https://github.com/openIE-dev/free-humanoid-corpus/blob/main/contention_packets/control-sim-to-real.html).
 - **Gazebo model.** For ROS 2 stack integration and lidar / GPS / 5G simulation. Compiled from the same UDD descriptor.
 - **Drake model.** For higher-fidelity contact and manipulation simulation, particularly for cartridge-swap and waste-hopper retrieval.
 - **Test scenes.** Mock dock-B fiducial layouts, curb-edge environments, slope-tilt scenarios, simulated shoal-fleet work-order streams.
