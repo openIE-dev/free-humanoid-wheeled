@@ -19,6 +19,8 @@ permalink: /ARCHITECTURE.html
 
 A ~70 kg, paved-environment humanoid with a wheeled differential-drive base and the same upper body as the bipedal Free Humanoid Platform. Expressed as a single OpenLoco UDD descriptor that compiles to URDF, MJCF, STL meshes, BOM, and assembly through the existing OpenLoco toolchain. Every non-trivial design choice cites a specific entry in the Free Humanoid Corpus by id.
 
+**Phase 1 status (2026-05-07):** descriptor v0.1.0 vendor-pinned to commercial-off-the-shelf components (T-Motor AK60-6 + mjbots Moteus n1 drive; Igus DryLin SHTS-15 tower lift; Livox MID-360 lidar; u-blox ZED-F9P RTK GNSS; VectorNav VN-100 IMU production / Adafruit BNO055 budget; Quectel RM502Q-AE 5G; NVIDIA Jetson Orin Nano Super + Raspberry Pi 4 Simplex compute; Bioenno 24V LiFePO4 battery). [Wheeled-base BOM](chassis/wheeled-base-v0.1-BOM.csv) is ~$9–10.5k for the wheeled-base subsystem alone (excludes the inherited upper body). Phase 2 work begins with chassis fabrication + drive-base prototype + dry-side bench test. Dock-B mock cartridge-swap end-to-end Phase 3, open-water shoal dock-B municipal-utility pilot Phase 4.
+
 This document is the canonical full-system spec for the wheeled morphology. It cross-references — and does not duplicate — the bipedal sibling's [ARCHITECTURE.md](../free-humanoid-platform/ARCHITECTURE.md) for everything inherited (upper body, sensing, compute, safety, manipulation, learning policy). Decisions that diverge from the bipedal sibling are argued in full here.
 
 ---
@@ -388,4 +390,4 @@ These commitments are this document's defaults. Subsystem sections (§2) reflect
 
 ---
 
-*Free Humanoid Wheeled — sibling morphology to the Free Humanoid Platform — designed for the shoal dock-B service mission — scaffold v0.1 — 2026-05-06.*
+*Free Humanoid Wheeled — sibling morphology to the Free Humanoid Platform — designed for the shoal dock-B service mission — Phase 1 v0.1.0 — 2026-05-07.*
